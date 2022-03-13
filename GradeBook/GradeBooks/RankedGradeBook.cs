@@ -19,7 +19,11 @@ namespace GradeBook.GradeBooks
 
         public override char GetLetterGrade(double averageGrade)
         {
-            int fifth = Students.Count/5;
+            if(Students.Count < 5)
+            {
+                throw new InvalidOperationException("Number of students must be 5 or greater");
+            }
+            int fifth = Students.Count / 5;
             int higherScoreCount = 0;
             for(int i = 0; i < Students.Count; i++)
             {
@@ -39,5 +43,30 @@ namespace GradeBook.GradeBooks
             else
                 return 'F';
         }
+
+        public override void CalculateStatistics()
+        {
+            if (Students.Count < 5)
+            {
+                Console.WriteLine("Ranked grading requires at least 5 students");
+            }
+            else
+            {
+                base.CalculateStatistics();
+            }
+        }
+
+        public override void CalculateStudentStatistics(string name)
+        {
+            if (Students.Count < 5)
+            {
+                Console.WriteLine("Ranked grading requires at least 5 students");
+            }
+            else
+            {
+                base.CalculateStudentStatistics(name);
+            }
+        }
+
     }
 }
